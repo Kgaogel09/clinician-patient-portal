@@ -1,13 +1,26 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { User, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
+import {
+    User, onAuthStateChanged, signOut as firebaseSignOut, createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    sendEmailVerification,
+    updateProfile
+} from "firebase/auth";
 import { auth } from "../lib/firebase";
 
 interface AuthContextType {
     user: User | null;
     loading: boolean;
     signOut: () => void;
+    signUpWithEmail: (
+        email: string,
+        password: string,
+        displayName?: string
+    ) => Promise<void>;
+    signInWithEmail: (email: string, password: string) => void;
+    resetPassword: (email: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,10 +55,44 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         firebaseSignOut(auth);
     };
 
+    const signUpWithEmail = async (
+        email: string,
+        password: string,
+        displayName?: string
+    ) => {
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+        if (displayName) {
+            await updateProfile(userCredential.user, { displayName });
+        }
+        // Optionally send email verification
+        await sendEmailVerification(userCredential.user);
+        // onAuthStateChanged will update `user`
+    };
+
+    const signInWithEmail = async (email: string, password: string) => {
+        await signInWithEmailAndPassword(auth, email, password);
+    };
+
+    const resetPassword = async (email: string) => {
+        await sendPasswordResetEmail(auth, email);
+    };
+
+
     return (
-        <AuthContext.Provider value= {{ user, loading, signOut }
-}>
-    { children }
-    </AuthContext.Provider>
-  );
+        <AuthContext.Provider value={{
+            user,
+            loading,
+            signOut,
+            signUpWithEmail,
+            signInWithEmail,
+            resetPassword
+        }
+        }>
+            {children}
+        </AuthContext.Provider>
+    );
 };
