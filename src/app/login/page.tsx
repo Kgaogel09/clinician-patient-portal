@@ -51,6 +51,7 @@ export default function Login() {
     setMessage(null);
   }, [tab]);
 
+
   useEffect(() => {
     if (user) router.push("/dashboard");
   }, [user, router]);
