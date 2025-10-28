@@ -1,21 +1,29 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/auth";
+import { NavItem, UserRole } from "@/types/types";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { getAuth, signOut } from "firebase/auth";
 import { LogOut, Stethoscope } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { RoleSelector } from "../role-selector/role-selector";
 
-const navItems = [
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/patients", label: "Patients" },
-    { href: "/chat", label: "Chat" },
+const navigationConfig: NavItem[] = [
+    { href: "/dashboard", label: "Dashboard", roles: ['patient', 'clinician', 'admin'] },
+    { href: "/patients", label: "Patient Lookup", roles: ['clinician', 'admin'] },
+    { href: "/chat", label: "AI Assistant", roles: ['patient', 'clinician', 'admin'] },
 ];
 
 export function Header() {
     const router = useRouter();
     const pathname = usePathname();
+    const { userProfile } = useAuth();
+
+    const getNavigationItems = (role: UserRole = 'patient'): NavItem[] => {
+        return navigationConfig.filter(item => item.roles.includes(role));
+    };
 
     const handleSignOut = async () => {
         const auth = getAuth();
@@ -36,7 +44,7 @@ export function Header() {
     };
 
     return (
-        <header className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <header className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-100 shadow-sm">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
@@ -48,7 +56,7 @@ export function Header() {
                 </div>
                 <NavigationMenu>
                     <NavigationMenuList className="flex flex-row gap-16">
-                        {navItems.map((item) => (
+                        {getNavigationItems(userProfile?.role || 'patient').map((item) => (
                             <NavigationMenuItem key={item.href}>
                                 <NavigationMenuLink asChild>
                                     <Link
@@ -68,14 +76,19 @@ export function Header() {
                         ))}
                     </NavigationMenuList>
                 </NavigationMenu>
-                <Button
-                    variant="outline"
-                    onClick={handleSignOut}
-                    className="text-white bg-red-400 font-bold"
-                >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Sign Out
-                </Button>
+                <div className="flex gap-4">
+                    {userProfile && (
+                        <RoleSelector />
+                    )}
+                    <Button
+                        variant="outline"
+                        onClick={handleSignOut}
+                        className="text-white bg-red-400 font-bold"
+                    >
+                        <LogOut className="h-3 w-3" />
+                        Logout
+                    </Button>
+                </div>
             </div>
         </header>
     );
