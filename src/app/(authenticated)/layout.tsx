@@ -1,6 +1,6 @@
 "use client";
 
-import { Header } from "@/components/layout/header";
+import { Header } from "@/components/layout/header/header";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
