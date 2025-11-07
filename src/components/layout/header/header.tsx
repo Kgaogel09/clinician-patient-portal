@@ -35,7 +35,6 @@ export function Header() {
         }
     };
 
-    // Check if a nav item is active
     const isActive = (href: string) => {
         if (href === "/dashboard") {
             return pathname === href;
