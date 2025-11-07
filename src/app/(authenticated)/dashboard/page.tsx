@@ -9,29 +9,9 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import TimeSeriesChart from '@/components/layout/time-series-chart/time-series-chart';
 
-// Generate sample time series data
-const generateSampleData = () => {
-    const data = [];
-    const startDate = new Date('2024-01-01');
-
-    for (let i = 0; i < 30; i++) {
-        const date = new Date(startDate);
-        date.setDate(startDate.getDate() + i);
-
-        data.push({
-            date,
-            value: Math.random() * 100 + 50 // Random values between 50-150
-        });
-    }
-
-    return data;
-};
-
 export default function Dashboard() {
     const { userProfile, user } = useAuth();
     const latestMetrics = healthMetrics[healthMetrics.length - 1];
-
-    const sampleData = generateSampleData();
 
 
     if (userProfile?.role === 'patient') {

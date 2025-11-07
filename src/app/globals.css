@@ -1,2 +1,19 @@
+/* Replace everything with this: */
 @import "tailwindcss";
-@import "tw-animate-css";
+
+/* Optional: Add your custom styles after the import */
+* {
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: white;
+    color: black;
+}
+
+/* Dark mode will be handled by the 'dark' class automatically */

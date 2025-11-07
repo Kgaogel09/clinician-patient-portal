@@ -9,6 +9,7 @@ import { LogOut, Stethoscope } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { RoleSelector } from "../role-selector/role-selector";
+import ThemeToggle from "../toggle-theme/toggle-theme";
 
 const navigationConfig: NavItem[] = [
     { href: "/dashboard", label: "Dashboard", roles: ['patient', 'clinician', 'admin'] },
@@ -43,12 +44,12 @@ export function Header() {
     };
 
     return (
-        <header className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-100 shadow-sm">
+        <header className="w-full sticky top-0 z-50 shadow-sm bg-white dark:bg-red">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
                         <Stethoscope className="h-6 w-6 text-blue-700" />
-                        <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+                        <h1 className="text-xl font-bold">
                             Clinician Patient Portal
                         </h1>
                     </div>
@@ -76,6 +77,7 @@ export function Header() {
                     </NavigationMenuList>
                 </NavigationMenu>
                 <div className="flex gap-4">
+                    <ThemeToggle />
                     {userProfile && (
                         <RoleSelector />
                     )}

@@ -55,7 +55,7 @@ export function PatientsLookupTable({
         </div>
       )}
 
-      <div className="bg-white overflow-x-auto w-full">
+      <div className="overflow-x-auto w-full">
         <Table>
           <TableHeader>
             <TableRow className="border-gray-100 text-gray-600">
@@ -71,7 +71,7 @@ export function PatientsLookupTable({
           <TableBody>
             {filteredPatients.map((patient) => (
               <TableRow className="hover:bg-transparent border-gray-100 text-gray-600" key={patient.id}>
-                <TableCell className={`font-medium text-black ${!isSnapshot ? 'pl-6' : 'p-0'}`}>{patient.name}</TableCell>
+                <TableCell className={`font-medium  ${!isSnapshot ? 'pl-6' : 'p-0'}`}>{patient.name}</TableCell>
                 <TableCell>{patient.id}</TableCell>
                 <TableCell>{patient.email}</TableCell>
                 {!isSnapshot && <TableCell>{patient.createdAt}</TableCell>}
