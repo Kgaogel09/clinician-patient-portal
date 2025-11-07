@@ -128,7 +128,7 @@ export default function Login() {
         setIsLoading(false);
       }
     },
-    [validateForm, tab, signInWithEmail, formState.email, formState.password, formState.displayName, signUpWithEmail, resetPassword]
+    [validateForm, formState, tab, signInWithEmail, signUpWithEmail, resetPassword]
   );
 
   const formConfig = useMemo(() => ({
@@ -245,12 +245,12 @@ export default function Login() {
                         <CardContent className="grid gap-6">
                           {tab === "signup" && (
                             <div className="grid gap-2">
-                              <Label htmlFor="name" className="md:text-sm font-medium">
+                              <Label htmlFor="displayName" className="md:text-sm font-medium">
                                 Full Name
                               </Label>
                               <Input
-                                className="shadow-md border-slate-100"
-                                id="name"
+                                className="shadow-sm border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
+                                id="displayName"
                                 type="text"
                                 value={formState.displayName}
                                 onChange={(e) => updateFormField("displayName", e.target.value)}
@@ -264,7 +264,7 @@ export default function Login() {
                               Email
                             </Label>
                             <Input
-                              className="shadow-md border-slate-100"
+                              className="shadow-sm border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
                               id="email"
                               type="email"
                               value={formState.email}
@@ -280,7 +280,7 @@ export default function Login() {
                                 Password
                               </Label>
                               <Input
-                                className="shadow-md border-slate-100"
+                                className="shadow-sm border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
                                 id="password"
                                 type="password"
                                 value={formState.password}
