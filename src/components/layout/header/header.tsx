@@ -44,12 +44,12 @@ export function Header() {
     };
 
     return (
-        <header className="w-full sticky top-0 z-50 shadow-sm bg-white dark:bg-red">
+        <header className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-100 shadow-sm dark:bg-black/75 dark:supports-[backdrop-filter]:bg-black/60 dark:border-gray-800">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
                         <Stethoscope className="h-6 w-6 text-blue-700" />
-                        <h1 className="text-xl font-bold">
+                        <h1 className="text-xl font-bold text-gray-900 tracking-tight dark:text-white">
                             Clinician Patient Portal
                         </h1>
                     </div>
