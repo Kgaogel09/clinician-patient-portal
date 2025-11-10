@@ -37,17 +37,17 @@ export function PatientsLookupTable({
       {!isSnapshot && (
         <div className="flex flex-col sm:flex-row justify-between gap-4 my-8">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
               placeholder="Search patients by name, ID, or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
+              className="pl-10 border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
             />
           </div>
           <Button
             variant="outline"
-            className="text-white bg-green-600 font-bold"
+            className="text-white bg-green-600 border-green-600 font-bold"
           >
             <Plus className="h-3 w-3" />
             Add Patient
@@ -58,7 +58,7 @@ export function PatientsLookupTable({
       <div className="overflow-x-auto w-full">
         <Table>
           <TableHeader>
-            <TableRow className="border-gray-100 text-gray-600">
+            <TableRow className="border-gray-100 dark:border-gray-800 text-gray-600 dark:text-gray-400">
               <TableHead className={`font-semibold ${!isSnapshot ? 'pl-6' : 'p-0'}`}
               >PATIENT NAME</TableHead>
               <TableHead className="font-semibold">PATIENT ID</TableHead>
@@ -70,7 +70,7 @@ export function PatientsLookupTable({
           </TableHeader>
           <TableBody>
             {filteredPatients.map((patient) => (
-              <TableRow className="hover:bg-transparent border-gray-100 text-gray-600" key={patient.id}>
+              <TableRow className="hover:bg-transparent border-gray-100 dark:border-gray-800 text-gray-600 dark:text-gray-400" key={patient.id}>
                 <TableCell className={`font-medium  ${!isSnapshot ? 'pl-6' : 'p-0'}`}>{patient.name}</TableCell>
                 <TableCell>{patient.id}</TableCell>
                 <TableCell>{patient.email}</TableCell>
@@ -80,10 +80,10 @@ export function PatientsLookupTable({
                   <TableCell className="text-right pr-4">
                     <div className="flex justify-end gap-2">
                       <Button variant='ghost' size='icon' className='rounded-full' aria-label={`product-${patient.id}-edit`}>
-                        <PencilIcon className="h-3 w-3 text-blue-500" />
+                        <PencilIcon className="h-3 w-3 text-blue-500 dark:text-blue-400" />
                       </Button>
                       <Button onClick={() => onPatientDelete(patient.id)} variant='ghost' size='icon' className='rounded-full' aria-label={`product-${patient.id}-remove`}>
-                        <Trash2Icon className="h-3 w-3 text-red-500" />
+                        <Trash2Icon className="h-3 w-3 text-red-500 dark:text-red-400" />
                       </Button>
                     </div>
                   </TableCell>

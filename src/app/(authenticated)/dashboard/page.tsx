@@ -18,11 +18,11 @@ export default function Dashboard() {
         return (
             <div className="container mx-auto p-4 mt-8">
                 <h1 className="text-4xl font-bold">Patient Dashboard</h1>
-                <p className="text-lg text-gray-600 mb-8">
+                <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
                     Welcome back, {user?.displayName || ''}! Here is a summary of your health today.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <Card className="shadow-md border-slate-100">
+                    <Card className="shadow-md border-slate-100 dark:border-slate-700">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium">Heart Rate</CardTitle>
                             <Heart className="h-4 w-4 text-muted-foreground" />
@@ -33,7 +33,7 @@ export default function Dashboard() {
                         </CardContent>
                     </Card>
 
-                    <Card className="shadow-md border-slate-100">
+                    <Card className="shadow-md border-slate-100 dark:border-slate-700">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium">Blood Pressure</CardTitle>
                             <Activity className="h-4 w-4 text-muted-foreground" />
@@ -46,7 +46,7 @@ export default function Dashboard() {
                         </CardContent>
                     </Card>
 
-                    <Card className="shadow-md border-slate-100">
+                    <Card className="shadow-md border-slate-100 dark:border-slate-700">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium">Daily Steps</CardTitle>
                             <TrendingUp className="h-4 w-4 text-muted-foreground" />
@@ -57,7 +57,7 @@ export default function Dashboard() {
                         </CardContent>
                     </Card>
 
-                    <Card className="shadow-md border-slate-100">
+                    <Card className="shadow-md border-slate-100 dark:border-slate-700">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium">Sleep</CardTitle>
                             <Moon className="h-4 w-4 text-muted-foreground" />
@@ -70,7 +70,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <Card className="shadow-md border-slate-100 col-span-2">
+                    <Card className="shadow-md border-slate-100 dark:border-slate-700 col-span-2">
                         <CardHeader>
                             <CardTitle>Recent Health Trends</CardTitle>
                         </CardHeader>
@@ -85,7 +85,7 @@ export default function Dashboard() {
                             </div>
                         </CardContent>
                     </Card>
-                    <Card className="text-white shadow-md border-slate-100 bg-gradient-to-r from-[#1447e6] to-[#5a7cff]">
+                    <Card className="text-white shadow-md border-slate-100 dark:border-slate-700 bg-gradient-to-r from-[#1447e6] to-[#5a7cff]">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">	<Bot />
                                 AI Assistant</CardTitle>
@@ -97,7 +97,7 @@ export default function Dashboard() {
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button className='w-full text-base font-medium rounded-full bg-blue-50 border border-blue-200 px-3 py-5 text-blue-600'>
+                            <Button className='w-full text-base font-medium rounded-full bg-blue-50 dark:bg-black/60 border border-blue-200 dark:border-blue-700 px-3 py-5 text-blue-600 dark:text-blue-500'>
                                 <Link href="/chat">Ask Assistant</Link></Button>
                         </CardFooter>
                     </Card>
@@ -110,12 +110,12 @@ export default function Dashboard() {
     return (
         <div className="container mx-auto p-4 mt-8">
             <h1 className="text-4xl font-bold">Clinician Dashboard</h1>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
                 Welcome back, {user?.displayName || ''}! Here is an overview of your day.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <Card className="shadow-md border-slate-100">
+                <Card className="shadow-md border-slate-100 dark:border-slate-700">
                     <CardHeader>
                         <CardTitle>Active Patients</CardTitle>
                     </CardHeader>
@@ -125,7 +125,7 @@ export default function Dashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-md border-slate-100">
+                <Card className="shadow-md border-slate-100 dark:border-slate-700">
                     <CardHeader>
                         <CardTitle>Appointments Today</CardTitle>
                     </CardHeader>
@@ -135,18 +135,18 @@ export default function Dashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-md border-slate-100">
+                <Card className="shadow-md border-slate-100 dark:border-slate-700">
                     <CardHeader>
                         <CardTitle>Critical Alerts</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-red-600">3</div>
+                        <div className="text-3xl font-bold text-red-500 dark:text-red-400">3</div>
                         <p className="text-sm text-muted-foreground">Requires attention</p>
                     </CardContent>
                 </Card>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <Card className="shadow-md border-slate-100 col-span-2">
+                <Card className="shadow-md border-slate-100 dark:border-slate-700 col-span-2">
                     <CardHeader>
                         <CardTitle>Recent Patients</CardTitle>
                     </CardHeader>
@@ -154,7 +154,7 @@ export default function Dashboard() {
                         <PatientsLookupTable patients={patientsInfo} isSnapshot={true} maxRows={5} />
                     </CardContent>
                 </Card>
-                <Card className="text-white shadow-md border-slate-100 bg-gradient-to-r from-[#1447e6] to-[#5a7cff]">
+                <Card className="text-white shadow-md border-slate-100 dark:border-slate-700 bg-gradient-to-r from-[#1447e6] to-[#5a7cff]">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">	<Bot />
                             AI Assistant</CardTitle>
@@ -166,7 +166,7 @@ export default function Dashboard() {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Button className='w-full text-base font-medium rounded-full bg-blue-50 border border-blue-200 px-3 py-5 text-blue-600'>
+                        <Button className='w-full text-base font-medium rounded-full bg-blue-50 dark:bg-black/60 border border-blue-200 px-3 py-5 text-blue-600 dark:border-blue-700 dark:text-blue-500'>
                             <Link href="/chat">Ask Assistant</Link></Button>
                     </CardFooter>
                 </Card>

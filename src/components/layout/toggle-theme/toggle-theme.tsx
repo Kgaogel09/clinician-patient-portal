@@ -17,15 +17,13 @@ export default function ThemeToggle() {
         return null;
     }
 
-    console.log(theme)
-
     return (
         <Button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             variant="ghost"
             aria-label="Toggle theme"
         >
-            {theme === "dark" ? <Sun className="text-blue-600" /> : <Moon />}
+            {theme === "dark" ? <Sun className="text-blue-600 " /> : <Moon />}
         </Button>
     );
 }

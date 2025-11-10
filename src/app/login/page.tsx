@@ -176,7 +176,7 @@ export default function Login() {
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-medium text-center">
             Welcome to <br />
-            <span className="text-blue-700 text-5xl md:text-6xl">
+            <span className="text-blue-600 dark:text-blue-500 text-5xl md:text-6xl">
               Clinician Patient Portal
             </span>
           </h1>
@@ -189,7 +189,7 @@ export default function Login() {
               <Button
                 onClick={signInWithGoogle}
                 variant="outline"
-                className="md:text-base bg-white shadow-sm border-gray-100"
+                className="md:text-base bg-white dark:bg-gray-900 shadow-sm border-gray-100 dark:border-gray-800"
                 aria-label="Sign in with Google"
                 disabled={isLoading}
               >
@@ -204,33 +204,33 @@ export default function Login() {
 
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
+                  <div className="w-full border-t border-gray-300 dark:border-gray-700" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="uppercase px-2 bg-white text-gray-500 font-bold">or</span>
+                  <span className="uppercase px-2 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-300 font-bold">or</span>
                 </div>
               </div>
 
               <div className="flex w-md max-w-md flex-col">
                 <Tabs value={tab === "reset" ? "login" : tab} onValueChange={handleModeChange}
                 >
-                  <TabsList className="flex rounded-lg bg-gray-100  mb-4 w-full">
+                  <TabsList className="flex rounded-lg bg-gray-100 dark:bg-gray-800  mb-4 w-full">
                     <TabsTrigger
                       value="signup"
-                      className={`font-medium text-base p-2 rounded-md w-full transition-colors ${tab === "signup" ? "bg-white shadow-sm text-gray-900" : "text-slate-600 hover:text-slate-800"}`}
+                      className={`font-medium text-base p-2 rounded-md w-full transition-colors ${tab === "signup" ? "bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-gray-100" : "text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"}`}
                     >
                       Sign Up
                     </TabsTrigger>
                     <TabsTrigger
                       value="login"
-                      className={`font-medium text-base p-2 rounded-md w-full transition-colors ${tab === "login" || tab === "reset" ? "bg-white shadow-sm text-gray-900" : "text-slate-600 hover:text-slate-800"}`}
+                      className={`font-medium text-base p-2 rounded-md w-full transition-colors ${tab === "login" || tab === "reset" ? "bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-gray-100" : "text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"}`}
                     >
                       {tab === "reset" ? "Reset" : "Log In"}
                     </TabsTrigger>
                   </TabsList>
 
                   <TabsContent value={tab === "reset" ? "login" : tab}>
-                    <Card className="shadow-md border-slate-100">
+                    <Card className="shadow-md border-slate-100 dark:border-slate-700">
                       <form onSubmit={handleSubmit} aria-label="Authentication form" className="flex flex-col gap-6">
 
                         <CardHeader>
@@ -249,7 +249,7 @@ export default function Login() {
                                 Full Name
                               </Label>
                               <Input
-                                className="shadow-sm border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
+                                className="shadow-sm border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
                                 id="displayName"
                                 type="text"
                                 value={formState.displayName}
@@ -264,7 +264,7 @@ export default function Login() {
                               Email
                             </Label>
                             <Input
-                              className="shadow-sm border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
+                              className="shadow-sm border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
                               id="email"
                               type="email"
                               value={formState.email}
@@ -280,7 +280,7 @@ export default function Login() {
                                 Password
                               </Label>
                               <Input
-                                className="shadow-sm border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300"
+                                className="shadow-sm border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
                                 id="password"
                                 type="password"
                                 value={formState.password}
@@ -295,7 +295,7 @@ export default function Login() {
                             <div className="text-right">
                               <Button
                                 type="button"
-                                className="text-sm text-blue-400 hover:text-blue-700 hover:underline"
+                                className="text-sm text-blue-400 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 hover:underline"
                                 onClick={() => setTab(tab === "login" ? "reset" : "login")}
                               >
                                 {tab === "login" ? "Forgot password?" : "Back to Log In?"}
@@ -315,8 +315,8 @@ export default function Login() {
 
 
                     <div aria-live="polite" className="p-2">
-                      {error && <div className="mb-4 text-red-600">{error}</div>}
-                      {message && <div className="mb-4 text-green-700">{message}</div>}
+                      {error && <div className="mb-4 text-red-500 dark:text-red-400">{error}</div>}
+                      {message && <div className="mb-4 text-green-700 dark:text-green-500">{message}</div>}
                     </div>
 
                   </TabsContent>

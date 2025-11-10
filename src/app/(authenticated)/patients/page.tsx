@@ -19,7 +19,7 @@ function Patients() {
 
       <div className="container mx-auto p-4 mt-8 h-screen">
          <h1 className="text-4xl font-bold">Patients Lookup</h1>
-         <p className="text-lg text-gray-600">
+         <p className="text-lg text-gray-600 dark:text-gray-400">
             Manage and view all patient records in your practice.
          </p>
 

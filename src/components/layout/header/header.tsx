@@ -44,12 +44,12 @@ export function Header() {
     };
 
     return (
-        <header className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-100 shadow-sm dark:bg-black/75 dark:supports-[backdrop-filter]:bg-black/60 dark:border-gray-800">
+        <header className="w-full sticky top-0 z-50 bg-white/95 dark:bg-gray-900/90 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/40 border-b border-gray-100 dark:border-gray-800 shadow-sm">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
-                        <Stethoscope className="h-6 w-6 text-blue-700" />
-                        <h1 className="text-xl font-bold text-gray-900 tracking-tight dark:text-white">
+                        <Stethoscope className="h-6 w-6 text-blue-600 dark:text-blue-600" />
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
                             Clinician Patient Portal
                         </h1>
                     </div>
@@ -64,8 +64,8 @@ export function Header() {
                                         className={`
                                             text-base font-medium transition-all duration-200
                                             ${isActive(item.href)
-                                                ? "text-blue-700 hover:text-blue-900"
-                                                : "text-gray-600 hover:text-gray-900"
+                                                ? "text-blue-600 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-400"
+                                                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
                                             }
                                         `}
                                     >
@@ -84,7 +84,7 @@ export function Header() {
                     <Button
                         variant="outline"
                         onClick={handleSignOut}
-                        className="text-white bg-red-400 font-bold"
+                        className="text-white bg-red-400 border-red-400 dark:bg-red-600 dark:border-red-600 font-bold"
                     >
                         <LogOut className="h-3 w-3" />
                         Logout

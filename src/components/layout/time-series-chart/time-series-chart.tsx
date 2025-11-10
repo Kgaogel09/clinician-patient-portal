@@ -144,6 +144,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             .attr('x', innerWidth / 2)
             .attr('y', -5)
             .attr('text-anchor', 'middle')
+            .attr('class', 'fill-black dark:fill-white')
             .style('font-size', '14px')
             .text(' Time Series Chart - ' + metric.charAt(0).toUpperCase() + metric.slice(1));
 

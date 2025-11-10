@@ -42,10 +42,10 @@ export function RoleSelector() {
             aria-label="Toggle bookmark"
             size="sm"
             variant="outline"
-            className="data-[state=on]:bg-transparent rounded-full bg-blue-50 border border-blue-200 ml-4 px-3 py-1"
+            className="data-[state=on]:bg-transparent rounded-full bg-blue-50 dark:bg-black/60  border border-blue-200 ml-4 px-3 py-1 dark:border-blue-700"
         >
-            {isClinician ? <Stethoscope className="h-3 w-3 text-blue-600" /> : <User className="h-3 w-3 text-blue-600" />}
-            <span className="text-sm font-medium text-blue-700 capitalize">{isClinician ? 'Clinician' : 'Patient'}</span>
+            {isClinician ? <Stethoscope className="h-3 w-3 text-blue-600 dark:text-blue-500" /> : <User className="h-3 w-3 text-blue-600 dark:text-blue-500" />}
+            <span className="text-sm font-medium text-blue-600 dark:text-blue-500 capitalize">{isClinician ? 'Clinician' : 'Patient'}</span>
 
         </Toggle>
     );

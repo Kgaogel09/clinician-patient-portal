@@ -204,21 +204,21 @@ export default function Chat() {
 
 	return (
 		<div className="container flex w-full mx-auto p-4 mt-8">
-			<div className='w-1/5 py-5 px-4 border-r border-slate-200 flex flex-col gap-6'>
+			<div className='w-1/5 py-5 px-4 border-r border-slate-100 dark:border-slate-700 flex flex-col gap-6'>
 				<Button onClick={clearMessages}
-					variant='ghost' size='icon' className='text-base justify-normal cursor-pointer text-gray-600 ' aria-label='new-chat'>
+					variant='ghost' size='icon' className='text-base justify-normal cursor-pointer text-gray-600 dark:text-gray-400' aria-label='new-chat'>
 					<SquarePen className="h-3 w-3" /> New chat
 				</Button>
 
 				<div className="space-y-1  overflow-y-auto">
-					<p className='font-semibold text-gray-900 mb-2'>Chats</p>
+					<p className='font-semibold text-gray-900 dark:text-gray-100 mb-2'>Chats</p>
 					{userChats.length === 0 ? (
-						<p className="text-sm text-gray-600 py-2">No previous chats</p>
+						<p className="text-sm text-gray-600 py-2 dark:text-gray-400">No previous chats</p>
 					) : (
 						userChats.sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()).map((chat) => (
 							<div
 								key={chat.id}
-								className={`flex items-center justify-between p-1 capitalize rounded-lg cursor-pointer hover:bg-gray-100 ${chat.id === chatId ? 'bg-blue-50' : ''
+								className={`flex items-center justify-between p-1 capitalize rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 ${chat.id === chatId ? 'bg-blue-50 dark:bg-black/60' : ''
 									}`}
 								onClick={() => loadChat(chat.id)}
 							>
@@ -226,10 +226,10 @@ export default function Chat() {
 								<Button
 									variant="ghost"
 									size="icon"
-									className="h-6 w-6 text-gray-600"
+									className="h-6 w-6 text-gray-600 dark:text-gray-400"
 									onClick={(e) => deleteChat(chat.id, e)}
 								>
-									<Trash2 className="h-3 w-3 text-red-600" />
+									<Trash2 className="h-3 w-3 text-red-500 dark:text-red-400" />
 								</Button>
 							</div>
 						))
@@ -266,7 +266,7 @@ export default function Chat() {
 									</div>
 									<div
 										className={`rounded-xl px-4 py-2 max-w-[80%] ${message.role === 'user'
-											? 'bg-slate-100 text-gray-900'
+											? 'bg-slate-100 dark:bg-slate-800 text-gray-900 dark:text-gray-100'
 											: 'bg-muted'
 											}`}
 									>
@@ -291,7 +291,7 @@ export default function Chat() {
 						)}
 					</div>
 					{messages.length === 0 && <div>
-						<p className='text-center text-gray-600 font-medium text-xl'>How can I help you today?</p>
+						<p className='text-center text-gray-600 dark:text-gray-400 font-medium text-xl'>How can I help you today?</p>
 					</div>}
 
 					<form onSubmit={handleSubmit} className="p-6">
@@ -301,7 +301,7 @@ export default function Chat() {
 								onChange={(e) => setInput(e.target.value)}
 								placeholder={placeholder}
 								disabled={isLoading}
-								className="flex-1 border-slate-100 focus-visible:ring-2 focus-visible:ring-gray-300 rounded-full p-8 placeholder:text-base placeholder:font-normal placeholder:transition-all placeholder:duration-500 placeholder:ease-in-out"
+								className="flex-1 border-slate-100 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-gray-300 rounded-full p-8 placeholder:text-base placeholder:font-normal placeholder:transition-all placeholder:duration-500 placeholder:ease-in-out dark:focus-visible:ring-gray-600"
 							/>
 							<Button
 								type="submit"
