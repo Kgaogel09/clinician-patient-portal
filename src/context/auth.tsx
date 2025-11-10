@@ -49,14 +49,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     // Get user profile from localStorage
     const getUserProfile = (user: User): UserProfile => {
+        const baseProfile = {
+            uid: user.uid,
+            email: user.email!,
+            displayName: user.displayName || undefined,
+            role: 'patient' as UserRole,
+            createdAt: new Date()
+        };
+
         if (typeof window === 'undefined') {
-            return {
-                uid: user.uid,
-                email: user.email!,
-                displayName: user.displayName || undefined,
-                role: 'patient',
-                createdAt: new Date()
-            };
+            return baseProfile;
         }
 
         const stored = localStorage.getItem(USER_PROFILE_KEY);
@@ -71,17 +73,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             }
         }
 
-        // Create new profile with default role as 'patient'
-        const newProfile: UserProfile = {
-            uid: user.uid,
-            email: user.email!,
-            displayName: user.displayName || undefined,
-            role: 'patient',
-            createdAt: new Date()
-        };
-
-        saveUserProfile(newProfile);
-        return newProfile;
+        saveUserProfile(baseProfile);
+        return baseProfile;
     };
 
     // Save user profile to localStorage
@@ -92,12 +85,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const profiles = stored ? JSON.parse(stored) : {};
         profiles[profile.uid] = {
             ...profile,
-            createdAt: profile.createdAt.toISOString() // Convert Date to string for storage
+            createdAt: profile.createdAt.toISOString()
         };
 
         localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(profiles));
     };
-
 
     // Listen for authentication state changes
     useEffect(() => {
@@ -126,21 +118,25 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         password: string,
         displayName?: string
     ) => {
-        const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-        if (displayName) {
-            await updateProfile(userCredential.user, { displayName });
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            if (displayName) {
+                await updateProfile(userCredential.user, { displayName });
+            }
+            await sendEmailVerification(userCredential.user);
+        } catch (error) {
+            console.error("Sign up error:", error);
+            throw error;
         }
-        // Optionally send email verification
-        await sendEmailVerification(userCredential.user);
-        // onAuthStateChanged will update `user`
     };
 
     const signInWithEmail = async (email: string, password: string) => {
-        await signInWithEmailAndPassword(auth, email, password);
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            console.error("Sign in error:", error);
+            throw error;
+        }
     };
 
     const resetPassword = async (email: string) => {
@@ -150,6 +146,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const updateUserRole = async (role: UserRole) => {
         if (!user || !userProfile) throw new Error("No user logged in");
 
+        if (!['patient', 'clinician', 'admin'].includes(role)) {
+            throw new Error("Invalid role");
+        }
+
         const updatedProfile: UserProfile = {
             ...userProfile,
             role
@@ -158,8 +158,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         saveUserProfile(updatedProfile);
         setUserProfile(updatedProfile);
     };
-
-
 
     return (
         <AuthContext.Provider value={{
