@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Clinician Patient Portal",
-  description: "AI platform for personalized longevity, combining biometric data, wearables, behavioral signals, and ML to deliver real-time, personalized insights.",
+  description: "Healthcare management platform for clinicians and patients",
 };
 
 export default function RootLayout({
