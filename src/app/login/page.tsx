@@ -4,7 +4,7 @@ import { useAuth } from "@/context/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import googleIcon from "../../../public/google.svg";
 import Image from 'next/image';
@@ -18,15 +18,12 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
-
 type AuthMode = "login" | "signup" | "reset";
-
 interface FormState {
   email: string;
   password: string;
   displayName: string;
 }
-
 
 export default function Login() {
   const router = useRouter();
@@ -41,16 +38,11 @@ export default function Login() {
     displayName: ""
   });
 
-  const updateFormField = useCallback((field: keyof FormState, value: string) => {
-    setFormState(prev => ({ ...prev, [field]: value }));
-  }, []);
-
   useEffect(() => {
     setFormState({ email: "", password: "", displayName: "" });
     setError(null);
     setMessage(null);
   }, [tab]);
-
 
   useEffect(() => {
     if (user) router.push("/dashboard");
@@ -76,36 +68,11 @@ export default function Login() {
     }
   }, [resetMessages]);
 
-  const validateForm = useCallback((): boolean => {
-    if (!formState.email.trim()) {
-      setError("Email is required");
-      return false;
-    }
-
-    if (tab !== "reset" && !formState.password) {
-      setError("Password is required");
-      return false;
-    }
-
-    if (tab === "signup" && !formState.displayName.trim()) {
-      setError("Full name is required");
-      return false;
-    }
-
-    return true;
-  }, [tab, formState]);
-
-
-
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
       setError(null);
       setMessage(null);
-
-      if (!validateForm()) {
-        return;
-      }
 
       setIsLoading(true);
 
@@ -128,36 +95,16 @@ export default function Login() {
         setIsLoading(false);
       }
     },
-    [validateForm, formState, tab, signInWithEmail, signUpWithEmail, resetPassword]
+    [formState, tab, signInWithEmail, signUpWithEmail, resetPassword]
   );
 
-  const formConfig = useMemo(() => ({
-    login: {
-      title: "Log In",
-      description: "Enter your credentials to access your account",
-      submitText: "Log In"
-    },
-    signup: {
-      title: "Sign Up",
-      description: "Enter your details to create a new account",
-      submitText: "Sign Up"
-    },
-    reset: {
-      title: "Reset Password",
-      description: "Enter your email to reset your password",
-      submitText: "Send reset email"
-    }
-  }), []);
+  const formConfig = {
+    login: { title: "Log In", description: "Enter your credentials to access your account", submitText: "Log In" },
+    signup: { title: "Sign Up", description: "Enter your details to create a new account", submitText: "Sign Up" },
+    reset: { title: "Reset Password", description: "Enter your email to reset your password", submitText: "Send reset email" }
+  };
 
   const currentConfig = formConfig[tab];
-
-  const handleModeChange = useCallback((value: string) => {
-    const validModes: AuthMode[] = ["signup", "login", "reset"];
-    if (validModes.includes(value as AuthMode)) {
-      setTab(value as AuthMode);
-    }
-  }, []);
-
 
   return (
     <div className="flex items-center justify-center h-screen w-full">
@@ -170,7 +117,7 @@ export default function Login() {
           width={1000}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 w-full" />
+        <div className="absolute inset-0 bg-black/50 w-full" />
       </div>
       <div className="flex flex-1 flex-col item-center justify-center">
         <div className="text-center mb-8">
@@ -212,7 +159,7 @@ export default function Login() {
               </div>
 
               <div className="flex w-md max-w-md flex-col">
-                <Tabs value={tab === "reset" ? "login" : tab} onValueChange={handleModeChange}
+                <Tabs value={tab} onValueChange={(value) => setTab(value as AuthMode)}
                 >
                   <TabsList className="flex rounded-lg bg-gray-100 dark:bg-gray-800  mb-4 w-full">
                     <TabsTrigger
@@ -229,10 +176,9 @@ export default function Login() {
                     </TabsTrigger>
                   </TabsList>
 
-                  <TabsContent value={tab === "reset" ? "login" : tab}>
+                  <TabsContent value={tab}>
                     <Card className="shadow-md border-slate-100 dark:border-slate-700">
                       <form onSubmit={handleSubmit} aria-label="Authentication form" className="flex flex-col gap-6">
-
                         <CardHeader>
                           <CardTitle>
                             {currentConfig.title}
@@ -253,7 +199,7 @@ export default function Login() {
                                 id="displayName"
                                 type="text"
                                 value={formState.displayName}
-                                onChange={(e) => updateFormField("displayName", e.target.value)}
+                                onChange={(e) => setFormState(prev => ({ ...prev, displayName: e.target.value }))}
                                 placeholder="Enter your full name"
                               />
                             </div>
@@ -268,7 +214,7 @@ export default function Login() {
                               id="email"
                               type="email"
                               value={formState.email}
-                              onChange={(e) => updateFormField("email", e.target.value)}
+                              onChange={(e) => setFormState(prev => ({ ...prev, email: e.target.value }))}
                               placeholder="Enter your email"
                               required
                             />
@@ -284,25 +230,36 @@ export default function Login() {
                                 id="password"
                                 type="password"
                                 value={formState.password}
-                                onChange={(e) => updateFormField("password", e.target.value)}
+                                onChange={(e) => setFormState(prev => ({ ...prev, password: e.target.value }))}
                                 placeholder={tab === "signup" ? "Create a password" : "Enter your password"}
                                 required
                               />
                             </div>
                           )}
-
-                          {["login", "reset"].includes(tab) && (
+                          {tab === "login" && (
                             <div className="text-right">
                               <Button
                                 type="button"
-                                className="text-sm text-blue-400 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 hover:underline"
-                                onClick={() => setTab(tab === "login" ? "reset" : "login")}
+                                variant="link"
+                                className="text-blue-400 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400"
+                                onClick={() => setTab("reset")}
                               >
-                                {tab === "login" ? "Forgot password?" : "Back to Log In?"}
+                                Forgot password?
                               </Button>
                             </div>
                           )}
-
+                          {tab === "reset" && (
+                            <div className="text-right">
+                              <Button
+                                type="button"
+                                variant="link"
+                                className="text-blue-400 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400"
+                                onClick={() => setTab("login")}
+                              >
+                                Back to Log In
+                              </Button>
+                            </div>
+                          )}
                         </CardContent>
 
                         <CardFooter>
@@ -313,12 +270,10 @@ export default function Login() {
                       </form>
                     </Card>
 
-
                     <div aria-live="polite" className="p-2">
                       {error && <div className="mb-4 text-red-500 dark:text-red-400">{error}</div>}
                       {message && <div className="mb-4 text-green-700 dark:text-green-500">{message}</div>}
                     </div>
-
                   </TabsContent>
                 </Tabs>
               </div>
