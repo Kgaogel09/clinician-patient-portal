@@ -1,4 +1,3 @@
-// components/TimeSeriesChart.tsx
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -21,6 +20,8 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     margin = { top: 20, right: 30, bottom: 30, left: 40 }
 }) => {
     const svgRef = useRef<SVGSVGElement>(null);
+
+
 
     useEffect(() => {
         if (!svgRef.current || !data.length) return;
@@ -66,6 +67,18 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             .x(d => xScale(new Date(d.date)))
             .y(d => yScale(getMetricValue(d)))
             .curve(d3.curveMonotoneX);
+
+        const tooltip = d3.select('body')
+            .append('div')
+            .attr('class', 'chart-tooltip')
+            .style('position', 'absolute')
+            .style('background', 'white')
+            .style('padding', '8px')
+            .style('border', '1px solid #ccc')
+            .style('border-radius', '4px')
+            .style('pointer-events', 'none')
+            .style('opacity', 0)
+            .style('color', '#000');
 
         // Add X axis
         svg.append('g')
@@ -121,22 +134,14 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             .attr('r', 3)
             .attr('fill', 'steelblue')
             .on('mouseover', function (event, d) {
-                // Tooltip on hover
-                const tooltip = d3.select('body')
-                    .append('div')
-                    .attr('class', 'tooltip')
-                    .style('position', 'absolute')
-                    .style('background', 'white')
-                    .style('padding', '5px')
-                    .style('border', '1px solid #ccc')
-                    .style('border-radius', '3px');
-
-                tooltip.html(`Date: ${d.date}<br/>Value: ${getMetricValue(d)}`)
+                tooltip
+                    .html(`Date: ${d.date}<br/>Value: ${getMetricValue(d)}`)
                     .style('left', (event.pageX + 10) + 'px')
-                    .style('top', (event.pageY - 10) + 'px');
+                    .style('top', (event.pageY - 10) + 'px')
+                    .style('opacity', 1);
             })
             .on('mouseout', function () {
-                d3.selectAll('.tooltip').remove();
+                tooltip.style('opacity', 0);
             });
 
         // Add chart title
@@ -148,11 +153,20 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             .style('font-size', '14px')
             .text(' Time Series Chart - ' + metric.charAt(0).toUpperCase() + metric.slice(1));
 
+        return () => {
+            d3.selectAll('.chart-tooltip').remove();
+        };
+
     }, [data, metric, width, height, margin]);
+
+    if (!data.length) {
+        return <div className="text-center py-8 text-gray-500">No data available</div>;
+    }
 
     return (
         <div className="time-series-chart">
-            <svg ref={svgRef}></svg>
+            <svg ref={svgRef} role="img"
+                aria-label={`Time series chart showing ${metric} over time`}></svg>
         </div>
     );
 };
