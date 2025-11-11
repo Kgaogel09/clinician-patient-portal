@@ -1,9 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Clinician-Patient Portal
+
+A comprehensive healthcare management platform built with Next.js that enables clinicians to manage patient information, track appointments, and monitor critical alerts through an intuitive dashboard interface.
+
+## Features
+
+- **Clinician Dashboard**: Overview of active patients, daily appointments, and critical alerts
+- **Patient Management**: Comprehensive patient lookup and information management
+- **AI Assistant Integration**: Built-in AI assistant for clinical decision support
+- **Authentication System**: Secure user authentication and role-based access
+- **Responsive Design**: Mobile-friendly interface with dark mode support
+- **Real-time Updates**: Live data updates for patient information and alerts
+
+## Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org) with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Custom component library with shadcn/ui
+- **Authentication**: Context-based auth system
+- **Font**: [Geist](https://vercel.com/font) font family
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── layout/
+│   │   ├── clinician-dashboard/
+│   │   ├── patients-lookup-table/
+│   │   └── ai-assistant-card/
+│   └── ui/
+├── context/
+│   └── auth.tsx
+├── data/
+└── app/
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd clinician-patient-portal
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
@@ -14,23 +71,52 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Main dashboard component: `src/components/layout/clinician-dashboard/clinician-dashboard.tsx`
+- Patient data: `src/data/data.ts`
+- Authentication context: `src/context/auth.tsx`
+
+## Key Components
+
+### Clinician Dashboard
+- Displays active patient count, daily appointments, and critical alerts
+- Shows recent patients table with snapshot view
+- Integrated AI assistant for clinical support
+
+### Patient Management
+- Searchable patient lookup table
+- Patient information cards and detailed views
+- Real-time patient status updates
+
+### AI Assistant
+- Role-based AI assistance for clinicians
+- Clinical decision support
+- Integrated chat interface
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [TypeScript](https://www.typescriptlang.org/docs/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme):
 
-## Deploy on Vercel
+```bash
+npm run build
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For detailed deployment instructions, see the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
