@@ -18,33 +18,19 @@ export default function Chat() {
 	const [chatId, setChatId] = useState<string>('');
 	const [userChats, setUserChats] = useState<Chats[]>([]);
 	const { userProfile } = useAuth();
-
 	const [placeholder, setPlaceholder] = useState("Ask about your health concerns...");
 
 
 	useEffect(() => {
-		let index = 0;
+		let currentIndex = 0;
 
-		const changePlaceholder = () => {
-
-			setTimeout(() => {
-				index = (index + 1) % suggestions.length;
-				setPlaceholder(suggestions[index]);
-
-			}, 5000);
-		};
-
-		const interval = setInterval(changePlaceholder, 5000);
+		const interval = setInterval(() => {
+			currentIndex = (currentIndex + 1) % suggestions.length;
+			setPlaceholder(suggestions[currentIndex]);
+		}, 3000);
 
 		return () => clearInterval(interval);
 	}, []);
-
-
-	useEffect(() => {
-		if (userProfile?.uid) {
-			loadUserChats();
-		}
-	}, [userProfile]);
 
 	const loadUserChats = useCallback(() => {
 		if (!userProfile?.uid) return;
@@ -60,6 +46,11 @@ export default function Chat() {
 		}
 	}, [userProfile?.uid]);
 
+	useEffect(() => {
+		if (userProfile?.uid) {
+			loadUserChats();
+		}
+	}, [userProfile]);
 
 	const saveChat = useCallback((messages: ChatMessage[], chatId?: string) => {
 		if (!userProfile?.uid || messages.length === 0) return;
@@ -108,9 +99,8 @@ export default function Chat() {
 		}
 	}, [userProfile?.uid]);
 
-	// Delete a specific chat
-	const deleteChat = useCallback((chatId: string, e: React.MouseEvent) => {
-		e.stopPropagation(); // Prevent triggering loadChat
+	const deleteChat = useCallback((targetChatId: string, e: React.MouseEvent) => {
+		e.stopPropagation();
 
 		if (!userProfile?.uid) return;
 
@@ -118,10 +108,11 @@ export default function Chat() {
 			const stored = localStorage.getItem(CHAT_STORAGE_KEY);
 			const allChats: Chats[] = stored ? JSON.parse(stored) : [];
 
-			const updatedChats = allChats.filter(chat => !(chat.id === chatId && chat.userId === userProfile.uid));
+			const updatedChats = allChats.filter(chat => !(chat.id === targetChatId && chat.userId === userProfile.uid));
 			localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(updatedChats));
 
-			if (chatId === chatId) {
+			// Fix the comparison
+			if (targetChatId === chatId) {
 				setMessages([]);
 				setChatId('');
 			}
@@ -130,7 +121,7 @@ export default function Chat() {
 		} catch (error) {
 			console.error('Error deleting chat from local storage:', error);
 		}
-	}, [userProfile?.uid, loadUserChats]);
+	}, [userProfile?.uid, loadUserChats, chatId]);  // Add chatId to dependencies
 
 
 	const clearMessages = useCallback(() => {
