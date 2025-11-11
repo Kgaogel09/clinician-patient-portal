@@ -46,7 +46,6 @@ export function PatientsLookupTable({
             />
           </div>
           <Button
-            variant="outline"
             className="text-white bg-green-600 border-green-600 font-bold"
           >
             <Plus className="h-3 w-3" />
@@ -69,27 +68,35 @@ export function PatientsLookupTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredPatients.map((patient) => (
-              <TableRow className="hover:bg-transparent border-gray-100 dark:border-gray-800 text-gray-600 dark:text-gray-400" key={patient.id}>
-                <TableCell className={`font-medium  ${!isSnapshot ? 'pl-6' : 'p-0'}`}>{patient.name}</TableCell>
-                <TableCell>{patient.id}</TableCell>
-                <TableCell>{patient.email}</TableCell>
-                {!isSnapshot && <TableCell>{patient.createdAt}</TableCell>}
-                <TableCell>{user?.displayName}</TableCell>
-                {!isSnapshot && onPatientDelete && (
-                  <TableCell className="text-right pr-4">
-                    <div className="flex justify-end gap-2">
-                      <Button variant='ghost' size='icon' className='rounded-full' aria-label={`product-${patient.id}-edit`}>
-                        <PencilIcon className="h-3 w-3 text-blue-500 dark:text-blue-400" />
-                      </Button>
-                      <Button onClick={() => onPatientDelete(patient.id)} variant='ghost' size='icon' className='rounded-full' aria-label={`product-${patient.id}-remove`}>
-                        <Trash2Icon className="h-3 w-3 text-red-500 dark:text-red-400" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                )}
+            {filteredPatients.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={isSnapshot ? 5 : 6} className="text-center py-8 text-gray-500">
+                  {isSnapshot ? "No patients found" : "No patients match your search"}
+                </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              filteredPatients.map((patient) => (
+                <TableRow className="hover:bg-transparent border-gray-100 dark:border-gray-800 text-gray-600 dark:text-gray-400" key={patient.id}>
+                  <TableCell className={`font-medium  ${!isSnapshot ? 'pl-6' : 'p-0'}`}>{patient.name}</TableCell>
+                  <TableCell>{patient.id}</TableCell>
+                  <TableCell>{patient.email}</TableCell>
+                  {!isSnapshot && <TableCell>{patient.createdAt}</TableCell>}
+                  <TableCell>{user?.displayName}</TableCell>
+                  {!isSnapshot && onPatientDelete && (
+                    <TableCell className="text-right pr-4">
+                      <div className="flex justify-end gap-2">
+                        <Button variant='ghost' size='icon' className='rounded-full' aria-label={`Edit patient ${patient.name}`}>
+                          <PencilIcon className="h-3 w-3 text-blue-500 dark:text-blue-400" />
+                        </Button>
+                        <Button onClick={() => onPatientDelete(patient.id)} variant='ghost' size='icon' className='rounded-full' aria-label={`Delete patient ${patient.name}`}>
+                          <Trash2Icon className="h-3 w-3 text-red-500 dark:text-red-400" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  )}
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </div>
