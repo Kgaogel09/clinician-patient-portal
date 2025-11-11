@@ -71,7 +71,7 @@ export function PatientsLookupTable({
             {filteredPatients.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={isSnapshot ? 5 : 6} className="text-center py-8 text-gray-500">
-                  {isSnapshot ? "No patients found" : "No patients match your search"}
+                  No patients found
                 </TableCell>
               </TableRow>
             ) : (
