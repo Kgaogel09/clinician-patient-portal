@@ -3,8 +3,11 @@
 import { Header } from "@/components/layout/header/header";
 import { ReactNode } from "react";
 
-export default function Layout({ children }: { children: ReactNode }) {
+interface AuthenticatedLayoutProps {
+    children: ReactNode;
+}
 
+export default function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
     return (
         <>
             <Header />
