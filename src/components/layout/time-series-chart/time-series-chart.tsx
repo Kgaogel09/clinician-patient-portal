@@ -6,7 +6,7 @@ import { HealthMetric } from '@/types/types';
 
 interface TimeSeriesChartProps {
     data: HealthMetric[];
-    metric: 'heartRate' | 'weight' | 'steps' | 'systolic' | 'diastolic';
+    metric: 'heartRate' | 'sleep' | 'steps' | 'systolic' | 'diastolic';
     width?: number;
     height?: number;
     margin?: { top: number; right: number; bottom: number; left: number };
@@ -44,7 +44,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
         const getMetricValue = (d: HealthMetric) => {
             switch (metric) {
                 case 'heartRate': return d.heartRate;
-                case 'weight': return d.weight;
+                case 'sleep': return d.sleep;
                 case 'steps': return d.steps;
                 case 'systolic': return d.bloodPressure.systolic;
                 case 'diastolic': return d.bloodPressure.diastolic;
