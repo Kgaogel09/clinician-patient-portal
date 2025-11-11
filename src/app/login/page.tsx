@@ -192,7 +192,7 @@ export default function Login() {
                           {tab === "signup" && (
                             <div className="grid gap-2">
                               <Label htmlFor="displayName" className="md:text-sm font-medium">
-                                Full Name
+                                Full Name<span className="text-red-500 ml-0">*</span>
                               </Label>
                               <Input
                                 className="shadow-sm border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
@@ -201,13 +201,14 @@ export default function Login() {
                                 value={formState.displayName}
                                 onChange={(e) => setFormState(prev => ({ ...prev, displayName: e.target.value }))}
                                 placeholder="Enter your full name"
+                                required
                               />
                             </div>
                           )}
 
                           <div className="grid gap-2">
                             <Label htmlFor="email" className="md:text-sm font-medium">
-                              Email
+                              Email<span className="text-red-500">*</span>
                             </Label>
                             <Input
                               className="shadow-sm border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
@@ -223,7 +224,7 @@ export default function Login() {
                           {tab !== "reset" && (
                             <div className="grid gap-2">
                               <Label htmlFor="password" className="md:text-sm font-medium">
-                                Password
+                                Password<span className="text-red-500">*</span>
                               </Label>
                               <Input
                                 className="shadow-sm border-slate-100 dark:border-slate-700 focus-visible:ring-2 dark:focus-visible:ring-gray-600 focus-visible:ring-gray-300"
