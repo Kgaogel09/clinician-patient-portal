@@ -13,17 +13,19 @@ export function RoleSelector() {
     const router = useRouter();
 
     const handleRoleToggle = async (pressed: boolean) => {
-        if (!userProfile) return;
+        if (!userProfile || isUpdating) return;
 
         const newRole: UserRole = pressed ? 'clinician' : 'patient';
-
         setIsUpdating(true);
 
-        router.push('/dashboard');
         try {
             await updateUserRole(newRole);
+
+            router.push('/dashboard');
+            router.refresh();
         } catch (error) {
             console.error("Failed to update role:", error);
+
         } finally {
             setIsUpdating(false);
         }
@@ -39,7 +41,7 @@ export function RoleSelector() {
             pressed={isClinician}
             disabled={isUpdating}
             onPressedChange={handleRoleToggle}
-            aria-label="Toggle bookmark"
+            aria-label={`Switch to ${isClinician ? 'patient' : 'clinician'} role`}
             size="sm"
             variant="outline"
             className="data-[state=on]:bg-transparent rounded-full bg-blue-50 dark:bg-black/60  border border-blue-200 ml-4 px-3 py-1 dark:border-blue-700"
