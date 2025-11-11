@@ -88,7 +88,6 @@ export function Header() {
                         <RoleSelector />
                     )}
                     <Button
-                        variant="outline"
                         onClick={handleSignOut}
                         className="text-white bg-red-400 border-red-400 dark:bg-red-600 dark:border-red-600 font-bold"
                     >
