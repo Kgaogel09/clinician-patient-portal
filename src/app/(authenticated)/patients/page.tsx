@@ -5,19 +5,25 @@ import { patientsInfo } from "@/data/data";
 import { Patient } from "@/types/types";
 import { useState } from "react";
 
-
-
 function Patients() {
    const [patients, setPatients] = useState<Patient[]>(patientsInfo);
 
    const handlePatientDelete = (patientId: string) => {
-      setPatients(prev => prev.filter(patient => patient.id !== patientId));
+      try {
+         const patientExists = patients.some(patient => patient.id === patientId);
+         if (!patientExists) {
+            console.warn(`Patient with ID ${patientId} not found`);
+            return;
+         }
+
+         setPatients(prev => prev.filter(patient => patient.id !== patientId));
+      } catch (error) {
+         console.error('Error deleting patient:', error);
+      }
    };
 
-
    return (
-
-      <div className="container mx-auto p-4 mt-8 h-screen">
+      <div className="container mx-auto p-4 mt-8">
          <h1 className="text-4xl font-bold">Patients Lookup</h1>
          <p className="text-lg text-gray-600 dark:text-gray-400">
             Manage and view all patient records in your practice.
@@ -28,8 +34,7 @@ function Patients() {
             onPatientDelete={handlePatientDelete}
          />
       </div>
-
-   )
+   );
 }
 
-export default Patients
+export default Patients;
