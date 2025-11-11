@@ -94,224 +94,39 @@ export const patientsInfo: Patient[] = [
 ];
 
 export const healthMetrics: HealthMetric[] = [
-    {
-        date: '2025-07-31',
-        heartRate: 68,
-        bloodPressure: { systolic: 119, diastolic: 79 },
-        weight: 74.5,
-        steps: 10234
-    },
-    {
-        date: '2025-07-30',
-        heartRate: 72,
-        bloodPressure: { systolic: 121, diastolic: 81 },
-        weight: 74.6,
-        steps: 8765
-    },
-    {
-        date: '2025-07-29',
-        heartRate: 70,
-        bloodPressure: { systolic: 118, diastolic: 78 },
-        weight: 74.8,
-        steps: 9456
-    },
-    {
-        date: '2025-07-28',
-        heartRate: 74,
-        bloodPressure: { systolic: 122, diastolic: 82 },
-        weight: 75.0,
-        steps: 7890
-    },
-    {
-        date: '2025-07-27',
-        heartRate: 69,
-        bloodPressure: { systolic: 117, diastolic: 77 },
-        weight: 74.9,
-        steps: 11234
-    },
-    {
-        date: '2025-07-26',
-        heartRate: 73,
-        bloodPressure: { systolic: 123, diastolic: 83 },
-        weight: 75.1,
-        steps: 15678
-    },
-    {
-        date: '2025-07-25',
-        heartRate: 71,
-        bloodPressure: { systolic: 120, diastolic: 80 },
-        weight: 75.0,
-        steps: 8321
-    },
-    {
-        date: '2025-07-24',
-        heartRate: 76,
-        bloodPressure: { systolic: 124, diastolic: 84 },
-        weight: 75.2,
-        steps: 7654
-    },
-    {
-        date: '2025-07-23',
-        heartRate: 68,
-        bloodPressure: { systolic: 119, diastolic: 79 },
-        weight: 74.8,
-        steps: 9876
-    },
-    {
-        date: '2025-07-22',
-        heartRate: 72,
-        bloodPressure: { systolic: 121, diastolic: 81 },
-        weight: 74.7,
-        steps: 8432
-    },
-    {
-        date: '2025-07-21',
-        heartRate: 70,
-        bloodPressure: { systolic: 118, diastolic: 78 },
-        weight: 74.9,
-        steps: 9123
-    },
-    {
-        date: '2025-07-20',
-        heartRate: 75,
-        bloodPressure: { systolic: 122, diastolic: 82 },
-        weight: 75.1,
-        steps: 7234
-    },
-    {
-        date: '2025-07-19',
-        heartRate: 69,
-        bloodPressure: { systolic: 117, diastolic: 77 },
-        weight: 74.8,
-        steps: 13456
-    },
-    {
-        date: '2025-07-18',
-        heartRate: 73,
-        bloodPressure: { systolic: 123, diastolic: 83 },
-        weight: 75.0,
-        steps: 8765
-    },
-    {
-        date: '2025-07-17',
-        heartRate: 71,
-        bloodPressure: { systolic: 120, diastolic: 80 },
-        weight: 75.2,
-        steps: 7987
-    },
-    {
-        date: '2025-07-16',
-        heartRate: 74,
-        bloodPressure: { systolic: 119, diastolic: 79 },
-        weight: 75.1,
-        steps: 8654
-    },
-    {
-        date: '2025-07-15',
-        heartRate: 72,
-        bloodPressure: { systolic: 120, diastolic: 80 },
-        weight: 75,
-        steps: 8432
-    },
-    {
-        date: '2025-07-14',
-        heartRate: 75,
-        bloodPressure: { systolic: 118, diastolic: 78 },
-        weight: 75.2,
-        steps: 7654
-    },
-    {
-        date: '2025-07-13',
-        heartRate: 70,
-        bloodPressure: { systolic: 122, diastolic: 82 },
-        weight: 74.8,
-        steps: 9210
-    },
-    {
-        date: '2025-07-12',
-        heartRate: 73,
-        bloodPressure: { systolic: 121, diastolic: 81 },
-        weight: 74.9,
-        steps: 10567
-    },
-    {
-        date: '2025-07-11',
-        heartRate: 68,
-        bloodPressure: { systolic: 117, diastolic: 77 },
-        weight: 75.0,
-        steps: 8123
-    },
-    {
-        date: '2025-07-10',
-        heartRate: 76,
-        bloodPressure: { systolic: 124, diastolic: 84 },
-        weight: 75.3,
-        steps: 7345
-    },
-    {
-        date: '2025-07-09',
-        heartRate: 71,
-        bloodPressure: { systolic: 119, diastolic: 79 },
-        weight: 75.1,
-        steps: 8890
-    },
-    {
-        date: '2025-07-08',
-        heartRate: 69,
-        bloodPressure: { systolic: 118, diastolic: 78 },
-        weight: 74.8,
-        steps: 9567
-    },
-    {
-        date: '2025-07-07',
-        heartRate: 74,
-        bloodPressure: { systolic: 122, diastolic: 82 },
-        weight: 75.0,
-        steps: 8234
-    },
-    {
-        date: '2025-07-06',
-        heartRate: 72,
-        bloodPressure: { systolic: 120, diastolic: 80 },
-        weight: 74.9,
-        steps: 11789
-    },
-    {
-        date: '2025-07-05',
-        heartRate: 70,
-        bloodPressure: { systolic: 119, diastolic: 79 },
-        weight: 74.7,
-        steps: 14321
-    },
-    {
-        date: '2025-07-04',
-        heartRate: 75,
-        bloodPressure: { systolic: 123, diastolic: 83 },
-        weight: 75.1,
-        steps: 9876
-    },
-    {
-        date: '2025-07-03',
-        heartRate: 73,
-        bloodPressure: { systolic: 121, diastolic: 81 },
-        weight: 75.2,
-        steps: 7654
-    },
-    {
-        date: '2025-07-02',
-        heartRate: 68,
-        bloodPressure: { systolic: 117, diastolic: 77 },
-        weight: 74.8,
-        steps: 8321
-    },
-    {
-        date: '2025-07-01',
-        heartRate: 71,
-        bloodPressure: { systolic: 120, diastolic: 80 },
-        weight: 75.0,
-        steps: 7890
-    }
+    { date: "2025-07-31", heartRate: 68, bloodPressure: { systolic: 119, diastolic: 79 }, sleep: 7.4, steps: 10234 },
+    { date: "2025-07-30", heartRate: 72, bloodPressure: { systolic: 121, diastolic: 81 }, sleep: 7.6, steps: 8765 },
+    { date: "2025-07-29", heartRate: 70, bloodPressure: { systolic: 118, diastolic: 78 }, sleep: 7.8, steps: 9456 },
+    { date: "2025-07-28", heartRate: 74, bloodPressure: { systolic: 122, diastolic: 82 }, sleep: 7.1, steps: 7890 },
+    { date: "2025-07-27", heartRate: 69, bloodPressure: { systolic: 117, diastolic: 77 }, sleep: 7.9, steps: 11234 },
+    { date: "2025-07-26", heartRate: 73, bloodPressure: { systolic: 123, diastolic: 83 }, sleep: 8.1, steps: 15678 },
+    { date: "2025-07-25", heartRate: 71, bloodPressure: { systolic: 120, diastolic: 80 }, sleep: 7.5, steps: 8321 },
+    { date: "2025-07-24", heartRate: 76, bloodPressure: { systolic: 124, diastolic: 84 }, sleep: 7.2, steps: 7654 },
+    { date: "2025-07-23", heartRate: 68, bloodPressure: { systolic: 119, diastolic: 79 }, sleep: 7.8, steps: 9876 },
+    { date: "2025-07-22", heartRate: 72, bloodPressure: { systolic: 121, diastolic: 81 }, sleep: 7.7, steps: 8432 },
+    { date: "2025-07-21", heartRate: 70, bloodPressure: { systolic: 118, diastolic: 78 }, sleep: 7.9, steps: 9123 },
+    { date: "2025-07-20", heartRate: 75, bloodPressure: { systolic: 122, diastolic: 82 }, sleep: 6.9, steps: 7234 },
+    { date: "2025-07-19", heartRate: 69, bloodPressure: { systolic: 117, diastolic: 77 }, sleep: 7.6, steps: 13456 },
+    { date: "2025-07-18", heartRate: 73, bloodPressure: { systolic: 123, diastolic: 83 }, sleep: 7.3, steps: 8765 },
+    { date: "2025-07-17", heartRate: 71, bloodPressure: { systolic: 120, diastolic: 80 }, sleep: 8.0, steps: 7987 },
+    { date: "2025-07-16", heartRate: 74, bloodPressure: { systolic: 119, diastolic: 79 }, sleep: 7.1, steps: 8654 },
+    { date: "2025-07-15", heartRate: 72, bloodPressure: { systolic: 120, diastolic: 80 }, sleep: 7.4, steps: 8432 },
+    { date: "2025-07-14", heartRate: 75, bloodPressure: { systolic: 118, diastolic: 78 }, sleep: 7.2, steps: 7654 },
+    { date: "2025-07-13", heartRate: 70, bloodPressure: { systolic: 122, diastolic: 82 }, sleep: 8.1, steps: 9210 },
+    { date: "2025-07-12", heartRate: 73, bloodPressure: { systolic: 121, diastolic: 81 }, sleep: 7.9, steps: 10567 },
+    { date: "2025-07-11", heartRate: 68, bloodPressure: { systolic: 117, diastolic: 77 }, sleep: 7.5, steps: 8123 },
+    { date: "2025-07-10", heartRate: 76, bloodPressure: { systolic: 124, diastolic: 84 }, sleep: 6.8, steps: 7345 },
+    { date: "2025-07-09", heartRate: 71, bloodPressure: { systolic: 119, diastolic: 79 }, sleep: 8.0, steps: 8890 },
+    { date: "2025-07-08", heartRate: 69, bloodPressure: { systolic: 118, diastolic: 78 }, sleep: 7.6, steps: 9567 },
+    { date: "2025-07-07", heartRate: 74, bloodPressure: { systolic: 122, diastolic: 82 }, sleep: 7.4, steps: 8234 },
+    { date: "2025-07-06", heartRate: 72, bloodPressure: { systolic: 120, diastolic: 80 }, sleep: 7.3, steps: 11789 },
+    { date: "2025-07-05", heartRate: 70, bloodPressure: { systolic: 119, diastolic: 79 }, sleep: 7.1, steps: 14321 },
+    { date: "2025-07-04", heartRate: 75, bloodPressure: { systolic: 123, diastolic: 83 }, sleep: 7.8, steps: 9876 },
+    { date: "2025-07-03", heartRate: 73, bloodPressure: { systolic: 121, diastolic: 81 }, sleep: 7.3, steps: 7654 },
+    { date: "2025-07-02", heartRate: 68, bloodPressure: { systolic: 117, diastolic: 77 }, sleep: 7.5, steps: 8321 },
+    { date: "2025-07-01", heartRate: 71, bloodPressure: { systolic: 120, diastolic: 80 }, sleep: 7.2, steps: 7890 }
 ];
+
 
 export const aiResponses = [
     "Based on your symptoms, I recommend monitoring your blood pressure regularly and consulting with your clinician during your next appointment.",
@@ -325,7 +140,7 @@ export const suggestions = [
     "E.g Ask about your health concerns...",
     "E.g How can I improve my sleep?...",
     "E.g What foods boost immunity?...",
-    "E.g Explain my blood test results",
+    "E.g Explain my blood test results...",
     "E.g Tips for managing stress...."
 ];
 

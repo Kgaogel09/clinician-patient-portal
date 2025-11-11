@@ -48,6 +48,6 @@ export interface HealthMetric {
         systolic: number;
         diastolic: number;
     };
-    weight: number;
+    sleep: number;
     steps: number;
 }
