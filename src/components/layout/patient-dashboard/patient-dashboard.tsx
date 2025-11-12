@@ -15,7 +15,7 @@ export default function PatientDashboard() {
         <div className="container mx-auto p-4 mt-8">
             <h1 className="text-4xl font-bold">Patient Dashboard</h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                Welcome back, {user?.displayName || ''}! Here is a summary of your health today.
+                Welcome, {user?.displayName || ''}! Here is a summary of your health today.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <Card className="shadow-md border-slate-100 dark:border-slate-700">

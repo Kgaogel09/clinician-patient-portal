@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             if (userProfile) {
                 return {
                     ...userProfile,
+                    displayName: user.displayName || userProfile.displayName,
                     createdAt: new Date(userProfile.createdAt)
                 };
             }
@@ -119,16 +120,28 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         displayName?: string
     ) => {
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
             if (displayName) {
-                await updateProfile(userCredential.user, { displayName });
+                await updateProfile(user, { displayName });
+                await user.reload();
             }
-            await sendEmailVerification(userCredential.user);
+
+            // ✅ manually sync the updated user into state
+            setUser(auth.currentUser);
+
+            // ✅ rebuild the user profile and save it immediately
+            const profile = getUserProfile(auth.currentUser!);
+            setUserProfile(profile);
+            saveUserProfile(profile);
+
+            await sendEmailVerification(user);
         } catch (error) {
             console.error("Sign up error:", error);
             throw error;
         }
     };
+
 
     const signInWithEmail = async (email: string, password: string) => {
         try {

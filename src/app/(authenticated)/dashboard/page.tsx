@@ -14,7 +14,7 @@ export default function Dashboard() {
     }
 
     // Patient Dashboard
-    if (userProfile?.role === 'patient') {
+    if (userProfile && userProfile?.role === 'patient') {
         return (
             <PatientDashboard />
         );
